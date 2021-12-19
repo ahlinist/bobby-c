@@ -18,7 +18,13 @@ char PINS[4][2] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEF
 void initWheels() {
     for (int i = 0; i < sizeof(PINS); i++) {
         char *pinNumber = PINS[i];
+
+        printf(strcat("init pin ", pinNumber));
+
         writeToFile("/sys/class/gpio/export", pinNumber);
+
+        printf(strcat("initialization done: ", pinNumber));
+
 
         char *directionFile = strcat(strcat("/sys/class/gpio/gpio", pinNumber), "/direction");
         writeToFile(directionFile, OUT_DIRECTION);
