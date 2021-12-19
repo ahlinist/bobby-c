@@ -19,19 +19,12 @@
 char PINS[4][3] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEFT_BACKWARD_PIN };
 
 void initWheels() {
-    printf("Start wheels init...\n");
-
     for (int i = 0; i < sizeof(PINS); i++) {
-
-        printf("picking a pin...\n");
-
         char *pinNumber = PINS[i];
 
         printf("init pin %s \n", pinNumber);
 
         writeToFile("/sys/class/gpio/export", pinNumber);
-
-        printf("initialization done: %s \n", pinNumber);
 
         char directionFile[255] = GPIO_PATH_PREFIX;
                 
