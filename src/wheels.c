@@ -32,7 +32,12 @@ void initWheels() {
 
 
         char *directionFile = strcat(strcat("/sys/class/gpio/gpio", pinNumber), "/direction");
+
+        printf("%s \n", directionFile);
+
         writeToFile(directionFile, OUT_DIRECTION);
+
+        printf("direction for pin %s is set \n", pinNumber);
     }
 
     printf("Wheels initialized.\n");
