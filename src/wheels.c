@@ -34,7 +34,13 @@ void initWheels() {
         printf("initialization done: %s \n", pinNumber);
 
         char *directionFile = GPIO_PATH_PREFIX;
+                
+        printf("%s \n", directionFile);
+
         strcat(directionFile, pinNumber);
+
+        printf("%s \n", directionFile);
+
         strcat(directionFile, "/direction");
 
         printf("%s \n", directionFile);
