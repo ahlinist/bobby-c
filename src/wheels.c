@@ -13,6 +13,9 @@
 #define LOW  "0" //0.0V at pin output
 #define HIGH "1" //3.3V at pin output
 
+#define GPIO_PATH_PREFIX "/sys/class/gpio/gpio"
+#define VALUE_PATH_POSTFIX "/value"
+
 char PINS[4][3] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEFT_BACKWARD_PIN };
 
 void initWheels() {
@@ -30,11 +33,9 @@ void initWheels() {
 
         printf("initialization done: %s \n", pinNumber);
 
-        char *gpioPath = strcat("/sys/class/gpio/gpio", pinNumber);
-
-        printf("%s \n", gpioPath);
-
-        char *directionFile = strcat(gpioPath, "/direction");
+        char *directionFile = GPIO_PATH_PREFIX;
+        strcat(directionFile, pinNumber);
+        strcat(directionFile, "/direction");
 
         printf("%s \n", directionFile);
 
@@ -47,16 +48,21 @@ void initWheels() {
 }
 
 void moveForward() {
-    char *rightForwardValueFile = strcat(strcat("/sys/class/gpio/gpio", RIGHT_FORWARD_PIN), "/value");
-    char *leftForwardValueFile = strcat(strcat("/sys/class/gpio/gpio", LEFT_FORWARD_PIN), "/value");
+    char *rightForwardValueFile = GPIO_PATH_PREFIX;
+    strcat(rightForwardValueFile, LEFT_FORWARD_PIN);
+    strcat(rightForwardValueFile, VALUE_PATH_POSTFIX);
+    char *leftForwardValueFile = GPIO_PATH_PREFIX;
+    strcat(leftForwardValueFile, LEFT_FORWARD_PIN);
+    strcat(leftForwardValueFile, VALUE_PATH_POSTFIX);
     writeToFile(rightForwardValueFile, HIGH);
     writeToFile(leftForwardValueFile, HIGH);
-
 }
 
 void stopWheels() {
     for (int i = 0; i < sizeof(PINS); i++) {
-        char *rightForwardValueFile = strcat(strcat("/sys/class/gpio/gpio", RIGHT_FORWARD_PIN), "/value");
-        writeToFile(rightForwardValueFile, LOW);
+        char *pathToValueFile = GPIO_PATH_PREFIX;
+        strcat(pathToValueFile, PINS[i]);
+        strcat(pathToValueFile, VALUE_PATH_POSTFIX);
+        writeToFile(pathToValueFile, LOW);
     }
 }
