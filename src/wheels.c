@@ -30,8 +30,11 @@ void initWheels() {
 
         printf("initialization done: %s \n", pinNumber);
 
+        char *gpioPath = strcat("/sys/class/gpio/gpio", pinNumber);
 
-        char *directionFile = strcat(strcat("/sys/class/gpio/gpio", pinNumber), "/direction");
+        printf("%s \n", gpioPath);
+
+        char *directionFile = strcat(gpioPath, "/direction");
 
         printf("%s \n", directionFile);
 
