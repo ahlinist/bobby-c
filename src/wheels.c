@@ -17,6 +17,9 @@ char PINS[4][2] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEF
 
 void initWheels() {
     for (int i = 0; i < sizeof(PINS); i++) {
+
+        printf("picking a pin...");
+
         char *pinNumber = PINS[i];
 
         printf(strcat("init pin ", pinNumber));
