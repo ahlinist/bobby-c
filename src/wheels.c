@@ -50,7 +50,7 @@ void initWheels() {
 
 void moveForward() {
     char rightForwardValueFile[255] = GPIO_PATH_PREFIX;
-    strcat(rightForwardValueFile, LEFT_FORWARD_PIN);
+    strcat(rightForwardValueFile, RIGHT_FORWARD_PIN);
     strcat(rightForwardValueFile, VALUE_PATH_POSTFIX);
     char leftForwardValueFile[255] = GPIO_PATH_PREFIX;
     strcat(leftForwardValueFile, LEFT_FORWARD_PIN);
