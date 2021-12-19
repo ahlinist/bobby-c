@@ -33,7 +33,7 @@ void initWheels() {
 
         printf("initialization done: %s \n", pinNumber);
 
-        char *directionFile = GPIO_PATH_PREFIX;
+        char directionFile[255] = GPIO_PATH_PREFIX;
                 
         printf("%s \n", directionFile);
 
@@ -54,10 +54,10 @@ void initWheels() {
 }
 
 void moveForward() {
-    char *rightForwardValueFile = GPIO_PATH_PREFIX;
+    char rightForwardValueFile[255] = GPIO_PATH_PREFIX;
     strcat(rightForwardValueFile, LEFT_FORWARD_PIN);
     strcat(rightForwardValueFile, VALUE_PATH_POSTFIX);
-    char *leftForwardValueFile = GPIO_PATH_PREFIX;
+    char leftForwardValueFile[255] = GPIO_PATH_PREFIX;
     strcat(leftForwardValueFile, LEFT_FORWARD_PIN);
     strcat(leftForwardValueFile, VALUE_PATH_POSTFIX);
     writeToFile(rightForwardValueFile, HIGH);
@@ -66,7 +66,7 @@ void moveForward() {
 
 void stopWheels() {
     for (int i = 0; i < sizeof(PINS); i++) {
-        char *pathToValueFile = GPIO_PATH_PREFIX;
+        char pathToValueFile[255] = GPIO_PATH_PREFIX;
         strcat(pathToValueFile, PINS[i]);
         strcat(pathToValueFile, VALUE_PATH_POSTFIX);
         writeToFile(pathToValueFile, LOW);
