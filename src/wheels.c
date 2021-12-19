@@ -8,6 +8,8 @@
 #define LEFT_FORWARD_PIN "26"   //BCM pin number, corresponds 37 physical pin number
 #define LEFT_BACKWARD_PIN "12"  //BCM pin number, corresponds 32 physical pin number
 
+#define PINS_COUNT 4
+
 #define OUT_DIRECTION "out"
 
 #define LOW  "0" //0.0V at pin output
@@ -19,7 +21,7 @@
 char PINS[4][3] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEFT_BACKWARD_PIN };
 
 void initWheels() {
-    for (int i = 0; i < sizeof(PINS) - 2; i++) { //-1 to ignore \n character
+    for (int i = 0; i < PINS_COUNT; i++) { //-1 to ignore \n character
         char *pinNumber = PINS[i];
 
         printf("init pin %s \n", pinNumber);
