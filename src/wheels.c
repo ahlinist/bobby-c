@@ -60,7 +60,7 @@ void moveForward() {
 }
 
 void stopWheels() {
-    for (int i = 0; i < sizeof(PINS); i++) {
+    for (int i = 0; i < PINS_COUNT; i++) {
         char pathToValueFile[255] = GPIO_PATH_PREFIX;
         strcat(pathToValueFile, PINS[i]);
         strcat(pathToValueFile, VALUE_PATH_POSTFIX);
