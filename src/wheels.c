@@ -13,29 +13,29 @@
 #define LOW  "0" //0.0V at pin output
 #define HIGH "1" //3.3V at pin output
 
-char PINS[4][2] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEFT_BACKWARD_PIN };
+char PINS[4][3] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEFT_BACKWARD_PIN };
 
 void initWheels() {
-    printf("Start wheels init...");
+    printf("Start wheels init...\n");
 
     for (int i = 0; i < sizeof(PINS); i++) {
 
-        printf("picking a pin...");
+        printf("picking a pin...\n");
 
         char *pinNumber = PINS[i];
 
-        printf(strcat("init pin ", pinNumber));
+        printf("init pin %s \n", pinNumber);
 
         writeToFile("/sys/class/gpio/export", pinNumber);
 
-        printf(strcat("initialization done: ", pinNumber));
+        printf("initialization done: %s \n", pinNumber);
 
 
         char *directionFile = strcat(strcat("/sys/class/gpio/gpio", pinNumber), "/direction");
         writeToFile(directionFile, OUT_DIRECTION);
     }
 
-    printf("Wheels initialized.");
+    printf("Wheels initialized.\n");
 }
 
 void moveForward() {
