@@ -3,14 +3,14 @@
 
 void initWheels();
 
-void forward();
+void moveForward();
 
-void back();
+void moveBack();
 
-void right();
+void moveRight();
 
-void left();
+void moveLeft();
 
-void stop();
+void stopWheels();
 
 #endif

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "filewriter.h"
 
@@ -9,18 +10,32 @@
 
 #define OUT_DIRECTION "out"
 
-#define LOW  0 //0.0V at pin output
-#define HIGH 1 //3.3V at pin output
+#define LOW  "0" //0.0V at pin output
+#define HIGH "1" //3.3V at pin output
 
-#define BUFFER_MAX 3 //max size of buffer written to sysf
+char PINS[4][2] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEFT_BACKWARD_PIN };
 
 void initWheels() {
-    writeToFile("/sys/class/gpio/export", RIGHT_FORWARD_PIN);
-    writeToFile("/sys/class/gpio/export", RIGHT_BACKWARD_PIN);
-    writeToFile("/sys/class/gpio/export", LEFT_FORWARD_PIN);
-    writeToFile("/sys/class/gpio/export", LEFT_BACKWARD_PIN);
+    for (int i = 0; i < sizeof(PINS); i++) {
+        char *pinNumber = PINS[i];
+        writeToFile("/sys/class/gpio/export", pinNumber);
+
+        char *directionFile = strcat(strcat("/sys/class/gpio/gpio", pinNumber), "/direction");
+        writeToFile(directionFile, OUT_DIRECTION);
+    }
 }
 
-void stop() {
-    printf("Stopping!");
+void moveForward() {
+    char *rightForwardValueFile = strcat(strcat("/sys/class/gpio/gpio", RIGHT_FORWARD_PIN), "/value");
+    char *leftForwardValueFile = strcat(strcat("/sys/class/gpio/gpio", LEFT_FORWARD_PIN), "/value");
+    writeToFile(rightForwardValueFile, HIGH);
+    writeToFile(leftForwardValueFile, HIGH);
+
+}
+
+void stopWheels() {
+    for (int i = 0; i < sizeof(PINS); i++) {
+        char *rightForwardValueFile = strcat(strcat("/sys/class/gpio/gpio", RIGHT_FORWARD_PIN), "/value");
+        writeToFile(rightForwardValueFile, LOW);
+    }
 }
