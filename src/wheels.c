@@ -16,6 +16,8 @@
 char PINS[4][2] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEFT_BACKWARD_PIN };
 
 void initWheels() {
+    printf("Start wheels init...");
+
     for (int i = 0; i < sizeof(PINS); i++) {
 
         printf("picking a pin...");
