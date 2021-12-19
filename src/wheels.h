@@ -1,7 +1,7 @@
 #ifndef WHEELS
 #define WHEELS
 
-void init();
+void initWheels();
 
 void forward();
 
