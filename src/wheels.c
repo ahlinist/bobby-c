@@ -23,29 +23,13 @@ char PINS[4][3] = { RIGHT_FORWARD_PIN, RIGHT_BACKWARD_PIN, LEFT_FORWARD_PIN, LEF
 void initWheels() {
     for (int i = 0; i < PINS_COUNT; i++) { //-1 to ignore \n character
         char *pinNumber = PINS[i];
-
-        printf("init pin %s \n", pinNumber);
-
         writeToFile("/sys/class/gpio/export", pinNumber);
 
         char directionFile[255] = GPIO_PATH_PREFIX;
-                
-        printf("%s \n", directionFile);
-
         strcat(directionFile, pinNumber);
-
-        printf("%s \n", directionFile);
-
         strcat(directionFile, "/direction");
-
-        printf("%s \n", directionFile);
-
         writeToFile(directionFile, OUT_DIRECTION);
-
-        printf("direction for pin %s is set \n", pinNumber);
     }
-
-    printf("Wheels initialized.\n");
 }
 
 void moveForward() {
