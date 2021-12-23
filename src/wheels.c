@@ -52,18 +52,20 @@ void exportPins(int pins[]) {
     for (int i = 0; i < PINS_COUNT; i++) {
         char pinNumber[2];
         sprintf(pinNumber, "%d", pins[i]);
-        printf("%s\n", pinNumber);
         writeToFile("/sys/class/gpio/export", pinNumber);
-        printf("%s\n", pinNumber);
     }
 
     printf("Pins export complete...\n");
 }
 
 void setPinDirections(int pins[], char *direction) {
+    printf("Setting directions...\n");
+
     for (int i = 0; i < PINS_COUNT; i++) {
         char directionFile[255];
         sprintf(directionFile, "%s%d%s", GPIO_PATH_PREFIX, pins[i], "/direction");
         writeToFile(directionFile, direction);
     }
+
+    printf("Directions definition complete...\n");
 }
