@@ -20,13 +20,13 @@
 #define GPIO_PATH_PREFIX "/sys/class/gpio/gpio"
 #define VALUE_PATH_POSTFIX "/value"
 
-void exportPins(int pins[]); 
-void setPinDirections(int pins[], char *direction);
+void exportPins(); 
+void setPinDirections();
 
 void initWheels() {
-    exportPins(PINS);
+    exportPins();
     sleep(0.5);
-    setPinDirections(PINS, OUT_DIRECTION);
+    setPinDirections(OUT_DIRECTION);
 }
 
 void moveForward() {
@@ -46,25 +46,25 @@ void stopWheels() {
     }
 }
 
-void exportPins(int pins[]) {
+void exportPins() {
     printf("Exporting pins...\n");
 
     for (int i = 0; i < PINS_COUNT; i++) {
         char pinNumber[2];
-        sprintf(pinNumber, "%d", pins[i]);
+        sprintf(pinNumber, "%d", PINS[i]);
         writeToFile("/sys/class/gpio/export", pinNumber);
     }
 
     printf("Pins export complete...\n");
 }
 
-void setPinDirections(int pins[], char *direction) {
+void setPinDirections() {
     printf("Setting directions...\n");
 
     for (int i = 0; i < PINS_COUNT; i++) {
         char directionFile[255];
-        sprintf(directionFile, "%s%d%s", GPIO_PATH_PREFIX, pins[i], "/direction");
-        writeToFile(directionFile, direction);
+        sprintf(directionFile, "%s%d%s", GPIO_PATH_PREFIX, PINS[i], "/direction");
+        writeToFile(directionFile, OUT_DIRECTION);
     }
 
     printf("Directions definition complete...\n");
