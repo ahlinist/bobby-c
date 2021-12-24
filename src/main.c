@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     sleep(3);
     turnLeft();
     sleep(1);
-    moveBack(6);
+    moveBack();
+    sleep(6);
     stopMotion();
 }
