@@ -22,11 +22,11 @@
 
 void exportPins(); 
 void setPinDirections();
-void writeValue(char *prefix, int pin, char *suffix, char *value);
+void writeValue(int pin, char *value);
 
 void initWheels() {
     exportPins();
-    sleep(0.5);
+    sleep(1);
     setPinDirections(OUT_DIRECTION);
 }
 
@@ -55,37 +55,29 @@ void setPinDirections() {
 }
 
 void rightWheelForward() {
-    char pathToFile[255];
-    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, RIGHT_FORWARD_PIN, VALUE_PATH_POSTFIX);
-    writeToFile(pathToFile, HIGH);
+    writeValue(RIGHT_FORWARD_PIN, HIGH);
 }
 
 void leftWheelForward() {
-    char pathToFile[255];
-    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, LEFT_FORWARD_PIN, VALUE_PATH_POSTFIX);
-    writeToFile(pathToFile, HIGH);
+    writeValue(LEFT_FORWARD_PIN, HIGH);
 }
 
 void rightWheelBack() {
-    char pathToFile[255];
-    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, RIGHT_BACKWARD_PIN, VALUE_PATH_POSTFIX);
-    writeToFile(pathToFile, HIGH);
+    writeValue(RIGHT_BACKWARD_PIN, HIGH);
 }
 
 void leftWheelBack() {
-    char pathToFile[255];
-    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, LEFT_BACKWARD_PIN, VALUE_PATH_POSTFIX);
-    writeToFile(pathToFile, HIGH);
+    writeValue(LEFT_BACKWARD_PIN, HIGH);
 }
 
 void stopWheels() {
     for (int i = 0; i < PINS_COUNT; i++) {
-        char pathToValueFile[255];
-        sprintf(pathToValueFile, "%s%d%s", GPIO_PATH_PREFIX, PINS[i], VALUE_PATH_POSTFIX);
-        writeToFile(pathToValueFile, LOW);
+        writeValue(PINS[i], LOW);
     }
 }
 
-void writeValue(char *prefix, int pin, char *suffix, char *value) {
-
+void writeValue(int pin, char *value) {
+    char pathToFile[255];
+    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, pin, VALUE_PATH_POSTFIX);
+    writeToFile(pathToFile, value);
 }
