@@ -22,28 +22,12 @@
 
 void exportPins(); 
 void setPinDirections();
+void writeValue(char *prefix, int pin, char *suffix, char *value);
 
 void initWheels() {
     exportPins();
     sleep(0.5);
     setPinDirections(OUT_DIRECTION);
-}
-
-void moveForward() {
-    char rightForwardValueFile[255];
-    char leftForwardValueFile[255];
-    sprintf(rightForwardValueFile, "%s%d%s", GPIO_PATH_PREFIX, RIGHT_FORWARD_PIN, VALUE_PATH_POSTFIX);
-    sprintf(leftForwardValueFile, "%s%d%s", GPIO_PATH_PREFIX, LEFT_FORWARD_PIN, VALUE_PATH_POSTFIX);
-    writeToFile(rightForwardValueFile, HIGH);
-    writeToFile(leftForwardValueFile, HIGH);
-}
-
-void stopWheels() {
-    for (int i = 0; i < PINS_COUNT; i++) {
-        char pathToValueFile[255];
-        sprintf(pathToValueFile, "%s%d%s", GPIO_PATH_PREFIX, PINS[i], VALUE_PATH_POSTFIX);
-        writeToFile(pathToValueFile, LOW);
-    }
 }
 
 void exportPins() {
@@ -68,4 +52,40 @@ void setPinDirections() {
     }
 
     printf("Directions definition complete...\n");
+}
+
+void rightWheelForward() {
+    char pathToFile[255];
+    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, RIGHT_FORWARD_PIN, VALUE_PATH_POSTFIX);
+    writeToFile(pathToFile, HIGH);
+}
+
+void leftWheelForward() {
+    char pathToFile[255];
+    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, LEFT_FORWARD_PIN, VALUE_PATH_POSTFIX);
+    writeToFile(pathToFile, HIGH);
+}
+
+void rightWheelBack() {
+    char pathToFile[255];
+    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, RIGHT_BACKWARD_PIN, VALUE_PATH_POSTFIX);
+    writeToFile(pathToFile, HIGH);
+}
+
+void leftWheelBack() {
+    char pathToFile[255];
+    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, LEFT_BACKWARD_PIN, VALUE_PATH_POSTFIX);
+    writeToFile(pathToFile, HIGH);
+}
+
+void stopWheels() {
+    for (int i = 0; i < PINS_COUNT; i++) {
+        char pathToValueFile[255];
+        sprintf(pathToValueFile, "%s%d%s", GPIO_PATH_PREFIX, PINS[i], VALUE_PATH_POSTFIX);
+        writeToFile(pathToValueFile, LOW);
+    }
+}
+
+void writeValue(char *prefix, int pin, char *suffix, char *value) {
+
 }

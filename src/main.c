@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <unistd.h> //sleep
 
-#include "wheels.h"
+#include "motion.h"
 
 int main(int argc, char *argv[]) {
-    initWheels();
+    initMotionModule();
     moveForward();
-    printf("Sleep for 5 seconds...\n");
-    sleep(5);
-    stopWheels();
+    sleep(3);
+    turnRight();
+    sleep(1);
+    moveForward();
+    sleep(3);
+    turnLeft();
+    sleep(1);
+    moveBack(6);
+    stopMotion();
 }
