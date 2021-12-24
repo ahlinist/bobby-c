@@ -6,14 +6,14 @@
 int main(int argc, char *argv[]) {
     initMotionModule();
     moveForward();
-    sleep(6);
+    sleep(2);
     turnRight();
-    sleep(0.5);
+    sleep(1);
     moveForward();
-    sleep(3);
+    sleep(1);
     turnLeft();
-    sleep(0.5);
+    sleep(1);
     moveBack();
-    sleep(6);
+    sleep(2);
     stopMotion();
 }
