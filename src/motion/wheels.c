@@ -17,8 +17,10 @@
 #define LOW  "0" //0.0V at pin output
 #define HIGH "1" //3.3V at pin output
 
+#define GPIO_EXPORT_FILE_PATH "/sys/class/gpio/export"
 #define GPIO_PATH_PREFIX "/sys/class/gpio/gpio"
-#define VALUE_PATH_POSTFIX "/value"
+#define VALUE_PATH_SUFFIX "/value"
+#define DIRECTION_SUFFIX "/direction"
 
 void exportPins(); 
 void setPinDirections();
@@ -36,7 +38,7 @@ void exportPins() {
     for (int i = 0; i < PINS_COUNT; i++) {
         char pinNumber[2];
         sprintf(pinNumber, "%d", PINS[i]);
-        writeToFile("/sys/class/gpio/export", pinNumber);
+        writeToFile(GPIO_EXPORT_FILE_PATH, pinNumber);
     }
 
     printf("Pins export complete...\n");
@@ -47,7 +49,7 @@ void setPinDirections() {
 
     for (int i = 0; i < PINS_COUNT; i++) {
         char directionFile[255];
-        sprintf(directionFile, "%s%d%s", GPIO_PATH_PREFIX, PINS[i], "/direction");
+        sprintf(directionFile, "%s%d%s", GPIO_PATH_PREFIX, PINS[i], DIRECTION_SUFFIX);
         writeToFile(directionFile, OUT_DIRECTION);
     }
 
@@ -78,6 +80,6 @@ void stopWheels() {
 
 void writeValue(int pin, char *value) {
     char pathToFile[255];
-    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, pin, VALUE_PATH_POSTFIX);
+    sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, pin, VALUE_PATH_SUFFIX);
     writeToFile(pathToFile, value);
 }
