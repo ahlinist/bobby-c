@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h> //sleep
 
-#include "motion/motion.h"
+#include "motion.h"
 
 int main(int argc, char *argv[]) {
     initMotionModule();

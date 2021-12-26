@@ -2,7 +2,7 @@
 #include <string.h>
 #include <unistd.h> //sleep
 
-#include "../util/filewriter.h"
+#include "filewriter.h"
 
 #define RIGHT_FORWARD_PIN 22  //BCM pin number, corresponds 15 physical pin number
 #define RIGHT_BACKWARD_PIN 23 //BCM pin number, corresponds 16 physical pin number
