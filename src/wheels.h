@@ -1,16 +1,16 @@
 #ifndef WHEELS
 #define WHEELS
 
-void initWheels();
+void init_wheels();
 
-void rightWheelForward();
+void right_wheel_forward();
 
-void leftWheelForward();
+void left_wheel_forward();
 
-void rightWheelBack();
+void right_wheel_back();
 
-void leftWheelBack();
+void left_wheel_back();
 
-void stopWheels();
+void stop_wheels();
 
 #endif

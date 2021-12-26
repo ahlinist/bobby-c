@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void writeToFile(char *path, char *content) {
+void write_to_file(char *path, char *content) {
     FILE *filePointer;
 
     filePointer = fopen(path, "w");

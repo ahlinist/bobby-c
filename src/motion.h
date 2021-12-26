@@ -1,16 +1,16 @@
 #ifndef MOTION
 #define MOTION
 
-void initMotionModule();
+void init_motion_module();
 
-void moveForward();
+void move_forward();
 
-void moveBack();
+void move_back();
 
-void turnRight();
+void turn_right();
 
-void turnLeft();
+void turn_left();
 
-void stopMotion();
+void stop_motion();
 
 #endif

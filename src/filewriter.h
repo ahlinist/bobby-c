@@ -1,6 +1,6 @@
 #ifndef FILE_WRITER
 #define FILE_WRITER
 
-void writeToFile(char *, char *);
+void write_to_file(char *, char *);
 
 #endif

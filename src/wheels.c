@@ -22,64 +22,64 @@
 #define VALUE_PATH_SUFFIX "/value"
 #define DIRECTION_SUFFIX "/direction"
 
-void exportPins(); 
-void setPinDirections();
-void writeValue(int pin, char *value);
+void export_pins(); 
+void set_pin_directions();
+void write_pin_value(int pin, char *value);
 
-void initWheels() {
-    exportPins();
+void init_wheels() {
+    export_pins();
     sleep(1);
-    setPinDirections(OUT_DIRECTION);
+    set_pin_directions(OUT_DIRECTION);
 }
 
-void exportPins() {
+void export_pins() {
     printf("Exporting pins...\n");
 
     for (int i = 0; i < PINS_COUNT; i++) {
         char pinNumber[2];
         sprintf(pinNumber, "%d", PINS[i]);
-        writeToFile(GPIO_EXPORT_FILE_PATH, pinNumber);
+        write_to_file(GPIO_EXPORT_FILE_PATH, pinNumber);
     }
 
     printf("Pins export complete...\n");
 }
 
-void setPinDirections() {
+void set_pin_directions() {
     printf("Setting directions...\n");
 
     for (int i = 0; i < PINS_COUNT; i++) {
         char directionFile[255];
         sprintf(directionFile, "%s%d%s", GPIO_PATH_PREFIX, PINS[i], DIRECTION_SUFFIX);
-        writeToFile(directionFile, OUT_DIRECTION);
+        write_to_file(directionFile, OUT_DIRECTION);
     }
 
     printf("Directions definition complete...\n");
 }
 
-void rightWheelForward() {
-    writeValue(RIGHT_FORWARD_PIN, HIGH);
+void right_wheel_forward() {
+    write_pin_value(RIGHT_FORWARD_PIN, HIGH);
 }
 
-void leftWheelForward() {
-    writeValue(LEFT_FORWARD_PIN, HIGH);
+void left_wheel_forward() {
+    write_pin_value(LEFT_FORWARD_PIN, HIGH);
 }
 
-void rightWheelBack() {
-    writeValue(RIGHT_BACKWARD_PIN, HIGH);
+void right_wheel_back() {
+    write_pin_value(RIGHT_BACKWARD_PIN, HIGH);
 }
 
-void leftWheelBack() {
-    writeValue(LEFT_BACKWARD_PIN, HIGH);
+void left_wheel_back() {
+    write_pin_value(LEFT_BACKWARD_PIN, HIGH);
 }
 
-void stopWheels() {
+void stop_wheels() {
     for (int i = 0; i < PINS_COUNT; i++) {
-        writeValue(PINS[i], LOW);
+        write_pin_value(PINS[i], LOW);
     }
 }
 
-void writeValue(int pin, char *value) {
+void write_pin_value(int pin, char *value) {
     char pathToFile[255];
     sprintf(pathToFile, "%s%d%s", GPIO_PATH_PREFIX, pin, VALUE_PATH_SUFFIX);
-    writeToFile(pathToFile, value);
+    write_to_file(pathToFile, value);
 }

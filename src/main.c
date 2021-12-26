@@ -4,16 +4,16 @@
 #include "motion.h"
 
 int main(int argc, char *argv[]) {
-    initMotionModule();
-    moveForward();
+    init_motion_module();
+    move_forward();
     sleep(2);
-    turnRight();
+    turn_right();
     sleep(1);
-    moveForward();
+    move_forward();
     sleep(1);
-    turnLeft();
+    turn_left();
     sleep(1);
-    moveBack();
+    move_back();
     sleep(2);
-    stopMotion();
+    stop_motion();
 }
